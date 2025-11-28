@@ -9,13 +9,19 @@ Created on Thu Nov 27 13:56:39 2025
 
 "IMPORTS"
 "----------------------------------------------------------------------------"
+
 import cv2 as cv
 import numpy as np
-from ultralyrics import YOLO
-
+from ultralytics import YOLO
+import torch
+import os
 "----------------------------------------------------------------------------"
 
-
+"General"
+"----------------------------------------------------------------------------"
+print("GPU Available: " + str(torch.cuda.is_available())) 
+print("GPU: " + str(torch.cuda.get_device_name(0)))  
+os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE" #supresses multiple OpenMP threads error
 
 "Step  1: Object Masking"
 "----------------------------------------------------------------------------"
@@ -70,7 +76,8 @@ cv.imshow("Edge Detection", thresh_small)
 cv.imshow("Mask Image", contours_small)
 cv.imshow("Final Extracted Image", extracted_small)
 
-cv.waitKey(0)
+#cv.waitKey(0)
+cv.waitKey(1000)
 cv.destroyAllWindows()
 
 "----------------------------------------------------------------------------"
@@ -80,7 +87,26 @@ cv.destroyAllWindows()
 
 model = YOLO("yolo11n.pt") #pretrained YOLO model v11 nano
 
+#model.train(data='Project 3 Data/Project 3 Data/data/data.yaml', 
+            #name = "LOAV-PCB-v0",
+            #epochs = 5, 
+            #batch = 8, 
+            #imgsz = 900, 
+            #workers = 0,
+            #resume = False) 
 
+model.train(data='Project 3 Data/Project 3 Data/data/data.yaml', 
+            name = "LOAV-PCB-v1",
+            epochs = 200, 
+            batch = 8, 
+            imgsz = 900, 
+            workers = 0,
+            resume = False) 
+
+
+
+
+cv.waitKey(0)
 
 
 #
