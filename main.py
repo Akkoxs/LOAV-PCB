@@ -23,8 +23,10 @@ print("GPU Available: " + str(torch.cuda.is_available()))
 print("GPU: " + str(torch.cuda.get_device_name(0)))  
 os.environ["KMP_DUPLICATE_LIB_OK"] = "TRUE" #supresses multiple OpenMP threads error
 
+
 "Step  1: Object Masking"
 "----------------------------------------------------------------------------"
+
 raw_MB_img = cv.imread("Project 3 Data/Project 3 Data/motherboard_image.JPEG")
 grey_MB_img = cv.cvtColor(raw_MB_img, cv.COLOR_BGR2GRAY)
 
@@ -95,21 +97,25 @@ model = YOLO("yolo11n.pt") #pretrained YOLO model v11 nano
             #workers = 0,
             #resume = False) 
 
+#inc. epoch
+#model.train(data='Project 3 Data/Project 3 Data/data/data.yaml', 
+            #name = "LOAV-PCB-v1",
+            #epochs = 200, 
+            #batch = 8, 
+            #imgsz = 900, 
+            #workers = 0,
+            #resume = False) 
+
+#inc. imgsz to 1140, out of mem. error on 1280, 
 model.train(data='Project 3 Data/Project 3 Data/data/data.yaml', 
-            name = "LOAV-PCB-v1",
+            name = "LOAV-PCB-v2",
             epochs = 200, 
             batch = 8, 
-            imgsz = 900, 
+            imgsz = 1140, 
             workers = 0,
             resume = False) 
 
-
-
-
 cv.waitKey(0)
-
-
-#
 
 "----------------------------------------------------------------------------"
 
