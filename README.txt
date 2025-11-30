@@ -42,4 +42,4 @@ Project 3 Data/
 MODELS TRAINED
 v0 - epochs = 5, batch = 8, imgsz = 900
 v1 - epochs = 200, batch = 8, imgsz = 900
-v2 - epochs = 200, batch = 2, imgsz = 
+v2 - epochs = 200, batch = 8, imgsz = 1140 

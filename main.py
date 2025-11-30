@@ -78,6 +78,10 @@ cv.imshow("Edge Detection", thresh_small)
 cv.imshow("Mask Image", contours_small)
 cv.imshow("Final Extracted Image", extracted_small)
 
+cv.imwrite("Motherboard/edgeDetect.png", thresh)
+cv.imwrite("Motherboard/mask.png", mask)
+cv.imwrite("Motherboard/final_extract.png", extracted_img)
+
 #cv.waitKey(0)
 cv.waitKey(1000)
 cv.destroyAllWindows()
@@ -107,13 +111,13 @@ model = YOLO("yolo11n.pt") #pretrained YOLO model v11 nano
             #resume = False) 
 
 #inc. imgsz to 1140, out of mem. error on 1280, 
-model.train(data='Project 3 Data/Project 3 Data/data/data.yaml', 
-            name = "LOAV-PCB-v2",
-            epochs = 200, 
-            batch = 8, 
-            imgsz = 1140, 
-            workers = 0,
-            resume = False) 
+#model.train(data='Project 3 Data/Project 3 Data/data/data.yaml', 
+            #name = "LOAV-PCB-v2",
+            #epochs = 200, 
+            #batch = 8, 
+            #imgsz = 1140, 
+            #workers = 0,
+            #resume = False) 
 
 cv.waitKey(0)
 
@@ -122,6 +126,17 @@ cv.waitKey(0)
 "Step  3: Evaluation"
 "----------------------------------------------------------------------------"
 
+model_v0 = YOLO("runs/detect/LOAV-PCB-v0/weights/best.pt")
+model_v1 = YOLO("runs/detect/LOAV-PCB-v1/weights/best.pt")
+model_v2 = YOLO("runs/detect/LOAV-PCB-v2/weights/best.pt")
+
+model_v0_eval = model_v0.predict(source = "Project 3 Data/Project 3 Data/data/evaluation", save = True, name = "v0_eval")
+model_v1_eval = model_v1.predict(source = "Project 3 Data/Project 3 Data/data/evaluation", save = True, name = "v1_eval")
+model_v2_eval = model_v2.predict(source = "Project 3 Data/Project 3 Data/data/evaluation", save = True, name = "v2_eval")
+
+model_v0_eval_MB =  model_v0.predict(source = "Motherboard/final_extract.png", save = True, name = "v0_MB_eval")
+model_v1_eval_MB =  model_v1.predict(source = "Motherboard/final_extract.png", save = True, name = "v1_MB_eval")
+model_v2_eval_MB =  model_v2.predict(source = "Motherboard/final_extract.png", save = True, name = "v2_MB_eval")
 
 
 #
