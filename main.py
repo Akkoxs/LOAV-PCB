@@ -130,16 +130,25 @@ model_v0 = YOLO("runs/detect/LOAV-PCB-v0/weights/best.pt")
 model_v1 = YOLO("runs/detect/LOAV-PCB-v1/weights/best.pt")
 model_v2 = YOLO("runs/detect/LOAV-PCB-v2/weights/best.pt")
 
-model_v0_eval = model_v0.predict(source = "Project 3 Data/Project 3 Data/data/evaluation", save = True, name = "v0_eval")
-model_v1_eval = model_v1.predict(source = "Project 3 Data/Project 3 Data/data/evaluation", save = True, name = "v1_eval")
-model_v2_eval = model_v2.predict(source = "Project 3 Data/Project 3 Data/data/evaluation", save = True, name = "v2_eval")
-
-model_v0_eval_MB =  model_v0.predict(source = "Motherboard/final_extract.png", save = True, name = "v0_MB_eval")
-model_v1_eval_MB =  model_v1.predict(source = "Motherboard/final_extract.png", save = True, name = "v1_MB_eval")
-model_v2_eval_MB =  model_v2.predict(source = "Motherboard/final_extract.png", save = True, name = "v2_MB_eval")
+print("Epoch saved:", model_v0.overrides.get('epoch', 'Unknown'))
+print("Epoch saved:", model_v1.overrides.get('epoch', 'Unknown'))
+print("Epoch saved:", model_v2.overrides.get('epoch', 'Unknown'))
 
 
-#
+#results_v0 = torch.load("runs/detect/LOAV-PCB-v0/weights/best.pt", map_location="gpu")
+#results_v1 = torch.load("runs/detect/LOAV-PCB-v1/weights/best.pt", map_location="gpu")
+#results_v2 = torch.load("runs/detect/LOAV-PCB-v2/weights/best.pt", map_location="gpu")
+#print(results_v0)
+#print(results_v1)
+#print(results_v2)
+
+#model_v0_eval = model_v0.predict(source = "Project 3 Data/Project 3 Data/data/evaluation", save = True, name = "v0_eval")
+#model_v1_eval = model_v1.predict(source = "Project 3 Data/Project 3 Data/data/evaluation", save = True, name = "v1_eval")
+#model_v2_eval = model_v2.predict(source = "Project 3 Data/Project 3 Data/data/evaluation", save = True, name = "v2_eval")
+
+#model_v0_eval_MB =  model_v0.predict(source = "Motherboard/final_extract.png", save = True, name = "v0_MB_eval")
+#model_v1_eval_MB =  model_v1.predict(source = "Motherboard/final_extract.png", save = True, name = "v1_MB_eval")
+#model_v2_eval_MB =  model_v2.predict(source = "Motherboard/final_extract.png", save = True, name = "v2_MB_eval")
 
 
 "----------------------------------------------------------------------------"
